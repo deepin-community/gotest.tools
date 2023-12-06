@@ -1,0 +1,2 @@
+# The symlink to /some/inexistent/link is part of gotest.tools's testsuite
+gotest.tools source: absolute-symbolic-link-target-in-source fs/testdata/copy-test-with-symlink/a/b/3 -> /some/inexistent/link

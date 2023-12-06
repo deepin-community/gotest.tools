@@ -1,15 +1,27 @@
-Source: template-repository
-Section: unknown
+Source: gotest.tools
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Uploaders: Arnaud Rebillout <arnaud.rebillout@collabora.com>,
+           Anthony Fok <foka@debian.org>
+Section: golang
+Testsuite: autopkgtest-pkg-go
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Build-Depends: debhelper-compat (= 13),
+               dh-golang,
+               golang-any,
+               golang-github-google-go-cmp-dev (>= 0.4.0~),
+               golang-github-pkg-errors-dev,
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/go-team/packages/gotest.tools
+Vcs-Git: https://salsa.debian.org/go-team/packages/gotest.tools.git
+Homepage: https://github.com/gotestyourself/gotest.tools
+Rules-Requires-Root: no
+XS-Go-Import-Path: gotest.tools
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: golang-github-gotestyourself-gotest.tools-dev
+Architecture: all
+Depends: ${misc:Depends},
+         golang-github-google-go-cmp-dev (>= 0.4.0~),
+         golang-github-pkg-errors-dev,
+Description: collection of go packages to support common testing patterns
+ Gotest.tools is a collection of packages to augment 'testing' and
+ support common testing patterns.
