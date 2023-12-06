@@ -1,0 +1,20 @@
+From: Shengjing Zhu <zhsj@debian.org>
+Date: Thu, 3 Dec 2020 23:40:55 +0800
+Subject: skip unreliable test
+
+---
+ assert/opt/opt_test.go | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/assert/opt/opt_test.go b/assert/opt/opt_test.go
+index f7f067e..a828bf4 100644
+--- a/assert/opt/opt_test.go
++++ b/assert/opt/opt_test.go
+@@ -224,6 +224,7 @@ func TestPathStringFromSlice(t *testing.T) {
+ }
+ 
+ func TestPathField(t *testing.T) {
++	t.Skip("unreliable test, slice order is not stable")
+ 	fixture := node{
+ 		Value: nodeValue{Value: 3},
+ 		Children: []node{
