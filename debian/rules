@@ -1,4 +1,22 @@
 #!/usr/bin/make -f
 
+# We're only interested in the library for now
+export DH_GOLANG_EXCLUDES := assert/cmd
+
 %:
-	dh $@
+	dh $@ --builddirectory=_build --buildsystem=golang --with=golang
+
+override_dh_auto_configure:
+	dh_auto_configure
+	# gotest.tools >= v2.2.0 contains invalid symlinks in fs/testdata
+	# which dh-golang does not copy but are needed by TestFromDirSymlink
+	cp -av fs/testdata/copy-test-with-symlink \
+		_build/src/gotest.tools/fs/testdata/
+	# gotest.tools >= v3.0 FTBFS due to "import aliases" that don't play
+	# well with the new go.mod and the "v3" import paths.
+	# https://github.com/gotestyourself/gotest.tools/issues/203
+	find _build/src/gotest.tools -name '*.go' | \
+		xargs sed -i '\;^package ;s; // import .*$$;;'
+
+override_dh_auto_install:
+	dh_auto_install -- --no-binaries

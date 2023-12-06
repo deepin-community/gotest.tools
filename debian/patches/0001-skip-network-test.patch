@@ -1,0 +1,26 @@
+From: Anthony Fok <foka@debian.org>
+Date: Thu, 3 Dec 2020 23:16:04 +0800
+Subject: Skip network test for Debian packaging
+
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2019-08-06
+
+TestWaitOnSocketWithTimeout/connection_to tries to connect to google.com
+Last-Update: 2019-08-06
+---
+ poll/check_test.go | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/poll/check_test.go b/poll/check_test.go
+index c853838..2ceef48 100644
+--- a/poll/check_test.go
++++ b/poll/check_test.go
+@@ -35,6 +35,7 @@ func TestWaitOnSocketWithTimeout(t *testing.T) {
+ 		assert.Equal(t, r.Message(), "socket tcp://foo.bar:55555 not available")
+ 	})
+ 
++	t.Skip("Skip test for Debian packaging due to network access (to google.com)")
+ 	t.Run("connection to ", func(t *testing.T) {
+ 		check := Connection("tcp", "google.com:80")
+ 		assert.Assert(t, check(t).Done())
